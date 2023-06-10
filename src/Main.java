@@ -7,6 +7,7 @@ public class Main
 
         String sExpression = scanner.nextLine();
         System.out.println(calc(sExpression));
+        scanner.close();
     }
     public static String calc(String sExpression) throws TestException 
     {
@@ -29,17 +30,17 @@ public class Main
             bRomeNum[0] = !bRomeNum[0];
             switch (Args[0]) 
             {
-                case "I" -> fNum1 = 1;
-                case "II" -> fNum1 = 2;
-                case "III" -> fNum1 = 3;
-                case "IV" -> fNum1 = 4;
-                case "V" -> fNum1 = 5;
-                case "VI" -> fNum1 = 6;
-                case "VII" -> fNum1 = 7;
-                case "VIII" -> fNum1 = 8;
-                case "IX" -> fNum1 = 9;
-                case "X" -> fNum1 = 10;
-                default -> throw new TestException("Число должно быть от I до X");
+                case "I": fNum1 = 1;
+                case "II": fNum1 = 2;
+                case "III": fNum1 = 3;
+                case "IV": fNum1 = 4;
+                case "V": fNum1 = 5;
+                case "VI": fNum1 = 6;
+                case "VII": fNum1 = 7;
+                case "VIII": fNum1 = 8;
+                case "IX": fNum1 = 9;
+                case "X": fNum1 = 10;
+                default: throw new TestException("Число должно быть от I до X");
             }
         }
         try 
@@ -53,26 +54,30 @@ public class Main
             bRomeNum[1] = !bRomeNum[1];
             switch (Args[2]) 
             {
-                case "I" -> fNum2 = 1;
-                case "II" -> fNum2 = 2;
-                case "III" -> fNum2 = 3;
-                case "IV" -> fNum2 = 4;
-                case "V" -> fNum2 = 5;
-                case "VI" -> fNum2 = 6;
-                case "VII" -> fNum2 = 7;
-                case "VIII" -> fNum2 = 8;
-                case "IX" -> fNum2 = 9;
-                case "X" -> fNum2 = 10;
-                default -> throw new TestException("Число должно быть от I до X");
+                case "I": fNum2 = 1;
+                case "II": fNum2 = 2;
+                case "III": fNum2 = 3;
+                case "IV": fNum2 = 4;
+                case "V": fNum2 = 5;
+                case "VI": fNum2 = 6;
+                case "VII": fNum2 = 7;
+                case "VIII": fNum2 = 8;
+                case "IX": fNum2 = 9;
+                case "X": fNum2 = 10;
+                default: throw new TestException("Число должно быть от I до X");
             }
         }
        if (bRomeNum[0] != bRomeNum[1])
            throw new TestException("Только арабские или только римские числа");
 
-        int iResult; String sReturn;
+        int iResult; String sReturn = "";
+        if(Args[1] != "+" && Args[1] != "-" && Args[1] != "*" && Args[1] != "/")
+        {
+            throw new TestException("Неверный операнд");
+        }
         switch (Args[1]) 
         {
-            case "+" -> 
+            case "+": 
             {
                 iResult = (int) fNum1 + (int) fNum2;
                 if (bRomeNum[0]) 
@@ -80,11 +85,11 @@ public class Main
                     if (iResult < 1)
                         throw new TestException("Результат вычислений с римскими числами должен быть положительным");
                     
-                    sReturn = Args[0] + " " + Args[1] + " " + Args[2] + " = " + m_prGetStrNum(iResult);
+                    sReturn = Args[0] + " " + Args[1] + " " + Args[2] + " = " + m_prGetStrNum(iResult);// = Args[0] + " " + Args[1] + " " + Args[2] + " = " + m_prGetStrNum(iResult);
                 } 
                 else sReturn = Args[0] + " " + Args[1] + " " + Args[2] + " = " + iResult;
             }
-            case "*" -> {
+            case "*": {
                 iResult = (int) fNum1 * (int) fNum2;
                 if (bRomeNum[0]) 
                 {
@@ -94,7 +99,7 @@ public class Main
                 } 
                 else sReturn = Args[0] + " " + Args[1] + " " + Args[2] + " = " + iResult;
             }
-            case "-" -> {
+            case "-": {
                 iResult = (int) fNum1 - (int) fNum2;
                 if (bRomeNum[0]) 
                 {
@@ -104,7 +109,7 @@ public class Main
                 } 
                 else sReturn = Args[0] + " " + Args[1] + " " + Args[2] + " = " + iResult;
             }
-            case "/" -> {
+            case "/": {
                 iResult = (int) fNum1 / (int) fNum2;
                 if (bRomeNum[0]) 
                 {
@@ -114,7 +119,6 @@ public class Main
                 } 
                 else sReturn = Args[0] + " " + Args[1] + " " + Args[2] + " = " + iResult;
             }
-            default -> throw new TestException("Неверный операнд");
         }
         return sReturn;
     }
